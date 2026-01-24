@@ -33,13 +33,29 @@ public class SaludAlDiaSteps {
             Assert.assertTrue("El panel de control no es visible", saludAlDiaPage.isVisibleLabelPanelControl());
         }
 
-        @Then("registro una nueva toma de datos")
+        @When("registro una nueva toma de datos")
         public void registrarNuevaToma() {
             saludAlDiaPage.clickBtnRegistrarToma();
             saludAlDiaPage.sendKeysToGlucosa("110");
             saludAlDiaPage.sendKeysToPresionSistolica("120");
             saludAlDiaPage.sendKeysToPresionDiastolica("89");
             saludAlDiaPage.clickBtnGuardarRegistro();
-            saludAlDiaPage.clickBtnHistorial();
+            saludAlDiaPage.clickAlertRegistro();
         }
-    }
+
+        @And("valido que la toma de datos se haya registrado correctamente")
+        public void validarRegistroCorrecto() {
+            saludAlDiaPage.clickBtnHistorial();
+            Assert.assertTrue(saludAlDiaPage.isVisibleLabelHistorial());
+            Assert.assertTrue(saludAlDiaPage.isVisibleRegistroConDatos("110","120","89"));
+        }
+
+        @Then("valido descarga de archivo PDF con mi historial")
+        public void validarDescargaPDF(){
+            saludAlDiaPage.limpiarCarpetaDescargas();
+            saludAlDiaPage.clickBtnDescargarPDF();
+            boolean descargaExitosa = saludAlDiaPage.isPDFDownloaded(".pdf");
+            Assert.assertTrue("El archivo PDF no se descargó correctamente", descargaExitosa);
+        }
+
+}

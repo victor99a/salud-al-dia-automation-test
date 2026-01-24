@@ -1,12 +1,16 @@
 package com.SaludAlDia.Page;
 
+import com.SaludAlDia.StepDefinition.Hooks;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import java.io.File;
 import java.time.Duration;
+import java.util.List;
 
 public class SaludAlDiaPage {
     private final WebDriver driver;
@@ -44,9 +48,18 @@ public class SaludAlDiaPage {
     @FindBy(xpath = "//a[normalize-space()='Historial']")
     private WebElement btnHistorial;
 
+    @FindBy(xpath = "//h1[normalize-space()='Historial de Mediciones']")
+    private WebElement labelHistorial;
+
+    @FindBy(className = "history-item")
+    private List<WebElement> listaRegistros;
+
+    @FindBy(xpath = "//button[@class='download-btn pdf']")
+    private WebElement btnDescargaPdf;
+
     public SaludAlDiaPage(WebDriver driver) {
         this.driver = driver;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10)); // Espera máx 10 seg
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         PageFactory.initElements(driver, this);
     }
 
@@ -70,6 +83,10 @@ public class SaludAlDiaPage {
         return labelPanelControl.isDisplayed();
     }
 
+    public boolean isVisibleLabelHistorial() {
+        wait.until(ExpectedConditions.visibilityOf(labelHistorial));
+        return labelHistorial.isDisplayed();
+    }
     public void sendKeysToEmail(String email) {
         wait.until(ExpectedConditions.visibilityOf(inputEmail));
         inputEmail.click();
@@ -105,8 +122,73 @@ public class SaludAlDiaPage {
         btnGuardarRegistro.click();
     }
 
+    public void clickAlertRegistro(){
+        try {
+            wait.until(ExpectedConditions.alertIsPresent());
+            Alert alerta = driver.switchTo().alert();
+            System.out.println("Alerta detectada: " + alerta.getText());
+            alerta.accept();
+        } catch (Exception e) {
+            System.out.println("No apareció ninguna alerta o ya fue manejada.");
+        }
+    }
+
     public void clickBtnHistorial() {
         wait.until(ExpectedConditions.elementToBeClickable(btnHistorial));
         btnHistorial.click();
+    }
+
+    public boolean isVisibleRegistroConDatos(String glucosa, String presionSistolica, String presionDiastolica) {
+        try {
+            wait.until(ExpectedConditions.visibilityOfAllElements(listaRegistros));
+            for (WebElement tarjeta : listaRegistros) {
+                String textoTarjeta = tarjeta.getText();
+                if (textoTarjeta.contains(glucosa) &&
+                        textoTarjeta.contains(presionSistolica) &&
+                        textoTarjeta.contains(presionDiastolica)) {
+                    return true;
+                }
+            }
+        } catch (Exception e) {
+            return false;
+        }
+        return false;
+    }
+
+    public void clickBtnDescargarPDF(){
+        wait.until(ExpectedConditions.elementToBeClickable(btnDescargaPdf));
+        btnDescargaPdf.click();
+    }
+
+    public void limpiarCarpetaDescargas() {
+        File carpeta = new File(Hooks.downloadPath);
+        File[] archivos = carpeta.listFiles();
+        if (archivos != null) {
+            for (File archivo : archivos) {
+                archivo.delete();
+            }
+        }
+    }
+
+    public boolean isPDFDownloaded(String extension) {
+        File carpeta = new File(Hooks.downloadPath);
+        int tiempoEspera = 0;
+        while (tiempoEspera < 10) {
+            File[] listaArchivos = carpeta.listFiles();
+            if (listaArchivos != null) {
+                for (File archivo : listaArchivos) {
+                    if (archivo.getName().endsWith(extension) && !archivo.getName().endsWith(".crdownload")) {
+                        return true;
+                    }
+                }
+            }
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            tiempoEspera++;
+        }
+        return false;
     }
 }
