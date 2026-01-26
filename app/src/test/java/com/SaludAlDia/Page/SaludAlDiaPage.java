@@ -57,6 +57,54 @@ public class SaludAlDiaPage {
     @FindBy(xpath = "//button[@class='download-btn pdf']")
     private WebElement btnDescargaPdf;
 
+    @FindBy(xpath = "//a[@class='btn-register']")
+    private WebElement btnRegistrarse;
+
+    @FindBy(xpath = "//input[@placeholder='12.345.678-9']")
+    private WebElement inputRutRegistro;
+
+    @FindBy(xpath = "//input[@placeholder='Juan Ignacio']")
+    private WebElement inputNombreRegistro;
+
+    @FindBy(xpath = "//input[@placeholder='Pérez Soto']")
+    private WebElement inputApellidoRegistro;
+
+    @FindBy(xpath = "//input[@placeholder='correo@ejemplo.com']")
+    private WebElement inputEmailRegistro;
+
+    @FindBy(xpath = "//input[@placeholder='••••••••']")
+    private WebElement inputPasswordRegistro;
+
+    @FindBy(xpath = "//button[@type='submit']")
+    private WebElement btnContinuarRegistro;
+
+    @FindBy(xpath = "//select[@name='blood_type']")
+    private WebElement cbxTipoSangre;
+
+    @FindBy(xpath = "//input[@placeholder='Ej: 170']")
+    private WebElement inputEstatura;
+
+    @FindBy(xpath = "//input[@placeholder='Ej: 75']")
+    private WebElement inputPeso;
+
+    @FindBy(xpath = "//input[@placeholder='Nombre completo']")
+    private WebElement inputNombreCompletoEmergencia;
+
+    @FindBy(xpath = "//input[@placeholder='9 1234 5678']")
+    private WebElement inputFonoEmergencia;
+
+    @FindBy(xpath = "//textarea[@placeholder='Medicamentos, alimentos...']")
+    private WebElement inputAlergias;
+
+    @FindBy(xpath = "//textarea[@placeholder='Diabetes, Hipertensión...']")
+    private WebElement inputEnfermadadesCronicas;
+
+    @FindBy(xpath = "//input[@name='data_processing_consent']")
+    private WebElement chkDataProcessingConsent;
+
+    @FindBy(xpath = "//button[@type='submit']")
+    private WebElement btnGuardarFichaMedica;
+
     public SaludAlDiaPage(WebDriver driver) {
         this.driver = driver;
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -66,6 +114,11 @@ public class SaludAlDiaPage {
     public void clickBtnLogin() {
         wait.until(ExpectedConditions.elementToBeClickable(btnLogin));
         btnLogin.click();
+    }
+
+    public void clickBtnRegistrarse() {
+        wait.until(ExpectedConditions.elementToBeClickable(btnRegistrarse));
+        btnRegistrarse.click();
     }
 
     public void clickBtnLoginSubmit() {
@@ -91,6 +144,78 @@ public class SaludAlDiaPage {
         wait.until(ExpectedConditions.visibilityOf(inputEmail));
         inputEmail.click();
         inputEmail.sendKeys(email);
+    }
+
+    public void sendKeysToRutRegistro(String rut) {
+        wait.until(ExpectedConditions.visibilityOf(inputRutRegistro));
+        inputRutRegistro.click();
+        inputRutRegistro.sendKeys(rut);
+    }
+
+    public void sendKeysToNombreRegistro(String nombre) {
+        wait.until(ExpectedConditions.visibilityOf(inputNombreRegistro));
+        inputNombreRegistro.click();
+        inputNombreRegistro.sendKeys(nombre);
+    }
+
+    public void sendKeysToApellidoRegistro(String apellido) {
+        wait.until(ExpectedConditions.visibilityOf(inputApellidoRegistro));
+        inputApellidoRegistro.click();
+        inputApellidoRegistro.sendKeys(apellido);
+    }
+
+    public void sendKeysToEmailRegistro(String email) {
+        wait.until(ExpectedConditions.visibilityOf(inputEmailRegistro));
+        inputEmailRegistro.click();
+        inputEmailRegistro.sendKeys(email);
+    }
+
+    public void sendKeysToPasswordRegistro(String password) {
+        wait.until(ExpectedConditions.visibilityOf(inputPasswordRegistro));
+        inputPasswordRegistro.click();
+        inputPasswordRegistro.sendKeys(password);
+    }
+
+    public void sendKeysEstaturaRegistro(String estatura) {
+        wait.until(ExpectedConditions.visibilityOf(inputEstatura));
+        inputEstatura.click();
+        inputEstatura.sendKeys(estatura);
+    }
+
+    public void sendKeysPeso(String peso) {
+        wait.until(ExpectedConditions.visibilityOf(inputPeso));
+        inputPeso.click();
+        inputPeso.sendKeys(peso);
+    }
+
+    public void sendKeysNombreCompletoEmergencia(String nombreCompleto) {
+        wait.until(ExpectedConditions.visibilityOf(inputNombreCompletoEmergencia));
+        inputNombreCompletoEmergencia.click();
+        inputNombreCompletoEmergencia.sendKeys(nombreCompleto);
+    }
+
+    public void selectTipoSangre(String tipoSangre) {
+        wait.until(ExpectedConditions.visibilityOf(cbxTipoSangre));
+        cbxTipoSangre.click();
+        cbxTipoSangre.sendKeys(tipoSangre);
+    }
+
+    public void sendKeysToFonoEmergencia(String fonoEmergencia) {
+        wait.until(ExpectedConditions.visibilityOf(inputFonoEmergencia));
+        inputFonoEmergencia.click();
+        inputFonoEmergencia.sendKeys(fonoEmergencia);
+    }
+
+    public void sendKeysAlergias(String alergias) {
+        wait.until(ExpectedConditions.visibilityOf(inputAlergias));
+        inputAlergias.click();
+        inputAlergias.sendKeys(alergias);
+    }
+
+    public void sendKeysInputEnfermedadesCronicas(String enfermedades) {
+        wait.until(ExpectedConditions.visibilityOf(inputEnfermadadesCronicas));
+        inputEnfermadadesCronicas.click();
+        inputEnfermadadesCronicas.sendKeys(enfermedades);
     }
 
     public void sendKeysToPassword(String password) {
@@ -158,6 +283,21 @@ public class SaludAlDiaPage {
     public void clickBtnDescargarPDF(){
         wait.until(ExpectedConditions.elementToBeClickable(btnDescargaPdf));
         btnDescargaPdf.click();
+    }
+
+    public void clickBtnContinuarRegistro() {
+        wait.until(ExpectedConditions.elementToBeClickable(btnContinuarRegistro));
+        btnContinuarRegistro.click();
+    }
+
+    public void clickChkDataProcessingConsent() {
+        wait.until(ExpectedConditions.elementToBeClickable(chkDataProcessingConsent));
+        chkDataProcessingConsent.click();
+    }
+
+    public void clickBtnGuardarFichaMedica() {
+        wait.until(ExpectedConditions.elementToBeClickable(btnGuardarFichaMedica));
+        btnGuardarFichaMedica.click();
     }
 
     public void limpiarCarpetaDescargas() {

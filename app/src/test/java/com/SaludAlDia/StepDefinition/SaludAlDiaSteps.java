@@ -58,4 +58,30 @@ public class SaludAlDiaSteps {
             Assert.assertTrue("El archivo PDF no se descargó correctamente", descargaExitosa);
         }
 
+        @And("completo registro nuevo usuario")
+        public void completarRegistroNuevoUsuario() {
+            saludAlDiaPage.clickBtnRegistrarse();
+            saludAlDiaPage.sendKeysToRutRegistro("92345698-9");
+            saludAlDiaPage.sendKeysToNombreRegistro("Juan");
+            saludAlDiaPage.sendKeysToApellidoRegistro("Pérez");
+            saludAlDiaPage.sendKeysToEmailRegistro("testi1ng@gmail.com");
+            saludAlDiaPage.sendKeysToPasswordRegistro("123456");
+            saludAlDiaPage.clickBtnContinuarRegistro();
+            saludAlDiaPage.clickAlertRegistro();
+        }
+
+        @And("completo ficha medica de usuario paciente")
+        public void completarFichaMedicaUsuarioPaciente() {
+            saludAlDiaPage.selectTipoSangre("O+");
+            saludAlDiaPage.sendKeysEstaturaRegistro("170");
+            saludAlDiaPage.sendKeysPeso("89");
+            saludAlDiaPage.sendKeysNombreCompletoEmergencia("Gatito Salvador");
+            saludAlDiaPage.sendKeysToFonoEmergencia("987654321");
+            saludAlDiaPage.sendKeysAlergias("Pasto, polvo y colores fuertes");
+            saludAlDiaPage.sendKeysInputEnfermedadesCronicas("Hipertensión y diabetes");
+            saludAlDiaPage.clickChkDataProcessingConsent();
+            saludAlDiaPage.clickBtnGuardarFichaMedica();
+        }
+
+
 }

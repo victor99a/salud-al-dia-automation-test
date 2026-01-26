@@ -9,7 +9,7 @@ import org.junit.runner.RunWith;
         features = "src/test/resources/features",
         glue = "com.SaludAlDia.StepDefinition",
         plugin = {"pretty", "html:build/reports/cucumber.html"},
-        tags = "@smoke"
+        tags = "@Registro"
 )
 public class TestRunner {
 }
