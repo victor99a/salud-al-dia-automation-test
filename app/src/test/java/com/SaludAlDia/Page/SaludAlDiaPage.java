@@ -105,6 +105,27 @@ public class SaludAlDiaPage {
     @FindBy(xpath = "//button[@type='submit']")
     private WebElement btnGuardarFichaMedica;
 
+    @FindBy(xpath = "//p[normalize-space()='Gestión de usuarios y pacientes.']")
+    private WebElement labelGestionUsuariosYPacientes;
+
+    @FindBy(xpath = "//button[@class='btn-create-specialist']")
+    private WebElement btnCreateSpecialist;
+
+    @FindBy(xpath = "//h3[@class='section-title']")
+    private WebElement labelListaUsuarios;
+
+    @FindBy(xpath = "//h1[normalize-space()='Panel de Control Medico']")
+    private WebElement labelPanelEspecialista;
+
+    @FindBy(xpath = "//th[normalize-space()='Paciente']")
+    private WebElement labelListaPacientes;
+
+    @FindBy(xpath = "//tbody/tr[1]/td[5]/button[1]")
+    private WebElement btnVerFichaMedicaPaciente;
+
+    @FindBy(xpath = "//h1[normalize-space()='Ficha Clínica Digital']")
+    private WebElement labelFichaMedicaPaciente;
+
     public SaludAlDiaPage(WebDriver driver) {
         this.driver = driver;
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -114,6 +135,11 @@ public class SaludAlDiaPage {
     public void clickBtnLogin() {
         wait.until(ExpectedConditions.elementToBeClickable(btnLogin));
         btnLogin.click();
+    }
+
+    public void clickBtnVerFichaMedicaPaciente() {
+        wait.until(ExpectedConditions.elementToBeClickable(btnVerFichaMedicaPaciente));
+        btnVerFichaMedicaPaciente.click();
     }
 
     public void clickBtnRegistrarse() {
@@ -134,6 +160,36 @@ public class SaludAlDiaPage {
     public boolean isVisibleLabelPanelControl() {
         wait.until(ExpectedConditions.visibilityOf(labelPanelControl));
         return labelPanelControl.isDisplayed();
+    }
+
+    public boolean isVisibleListaPacientes() {
+        wait.until(ExpectedConditions.visibilityOf(labelListaPacientes));
+        return labelListaPacientes.isDisplayed();
+    }
+
+    public boolean isVisibleLabelPanelEspecialista() {
+        wait.until(ExpectedConditions.visibilityOf(labelPanelEspecialista));
+        return labelPanelEspecialista.isDisplayed();
+    }
+
+    public boolean isVisibleLabelFichaMedicaPaciente() {
+        wait.until(ExpectedConditions.visibilityOf(labelFichaMedicaPaciente));
+        return labelFichaMedicaPaciente.isDisplayed();
+    }
+
+    public boolean isVisibleLabelGestionUsuariosYPacientes() {
+        wait.until(ExpectedConditions.visibilityOf(labelGestionUsuariosYPacientes));
+        return labelGestionUsuariosYPacientes.isDisplayed();
+    }
+
+    public boolean isVisibleLabelListaUsuarios() {
+        wait.until(ExpectedConditions.visibilityOf(labelListaUsuarios));
+        return labelListaUsuarios.isDisplayed();
+    }
+
+    public boolean isVisibleBtnCreateSpecialist() {
+        wait.until(ExpectedConditions.visibilityOf(btnCreateSpecialist));
+        return btnCreateSpecialist.isDisplayed();
     }
 
     public boolean isVisibleLabelHistorial() {

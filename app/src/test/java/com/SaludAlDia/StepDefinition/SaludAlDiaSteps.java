@@ -61,10 +61,10 @@ public class SaludAlDiaSteps {
         @And("completo registro nuevo usuario")
         public void completarRegistroNuevoUsuario() {
             saludAlDiaPage.clickBtnRegistrarse();
-            saludAlDiaPage.sendKeysToRutRegistro("92345698-9");
+            saludAlDiaPage.sendKeysToRutRegistro("92016982-9");
             saludAlDiaPage.sendKeysToNombreRegistro("Juan");
             saludAlDiaPage.sendKeysToApellidoRegistro("Pérez");
-            saludAlDiaPage.sendKeysToEmailRegistro("testi1ng@gmail.com");
+            saludAlDiaPage.sendKeysToEmailRegistro("testiiii1ng@gmail.com");
             saludAlDiaPage.sendKeysToPasswordRegistro("123456");
             saludAlDiaPage.clickBtnContinuarRegistro();
             saludAlDiaPage.clickAlertRegistro();
@@ -81,7 +81,51 @@ public class SaludAlDiaSteps {
             saludAlDiaPage.sendKeysInputEnfermedadesCronicas("Hipertensión y diabetes");
             saludAlDiaPage.clickChkDataProcessingConsent();
             saludAlDiaPage.clickBtnGuardarFichaMedica();
+            saludAlDiaPage.clickAlertRegistro();
         }
+
+    @And("ingreso con mis credenciales de administrador al portal privado paciente")
+    public void ingresoAlLoginAdministrador() {
+        saludAlDiaPage.clickBtnLogin();
+        saludAlDiaPage.sendKeysToEmail("adminy@gmail.com");
+        saludAlDiaPage.sendKeysToPassword("yeider360");
+        saludAlDiaPage.clickBtnLoginSubmit();
+    }
+
+    @And("valido que el administrador tenga acceso a agregar un especialista")
+    public void validarAccesoAgregarEspecialista() {
+        Assert.assertTrue("El botón de agregar especialista no es visible", saludAlDiaPage.isVisibleBtnCreateSpecialist());
+    }
+
+    @And("valido que el administrador tenga acceso a la lista de usuarios registrados")
+    public void validarAccesoListaUsuariosRegistrados() {
+        Assert.assertTrue("El botón de lista de usuarios no es visible", saludAlDiaPage.isVisibleLabelListaUsuarios());
+    }
+
+    @And("valido que accede al panel de control de administrador")
+    public void validarPanelDeControlAdministrador() {
+        Assert.assertTrue("El panel de control de administrador no es visible", saludAlDiaPage.isVisibleLabelPanelControl());
+    }
+
+    @And("ingreso con mis credenciales de especialista al portal privado paciente")
+    public void ingresoAlLoginEspecialista() {
+        saludAlDiaPage.clickBtnLogin();
+        saludAlDiaPage.sendKeysToEmail("vic@gmail.com");
+        saludAlDiaPage.sendKeysToPassword("Victor360_");
+        saludAlDiaPage.clickBtnLoginSubmit();
+    }
+
+    @And("valido que el especialista tenga acceso al panel de pacientes asignados")
+    public void validarAccesoListaPacientesAsignados() {
+        Assert.assertTrue("El botón de lista de pacientes asignados no es visible", saludAlDiaPage.isVisibleLabelPanelEspecialista());
+        Assert.assertTrue("El botón de lista de pacientes asignados no es visible", saludAlDiaPage.isVisibleListaPacientes());
+    }
+
+    @Then("valido que al hacer click en ver ficha medica de un paciente se despliegue la informacion correctamente")
+    public void validarVerFichaMedicaPaciente() {
+        saludAlDiaPage.clickBtnVerFichaMedicaPaciente();
+        Assert.assertTrue("La información de la ficha médica no es visible", saludAlDiaPage.isVisibleLabelFichaMedicaPaciente());
+    }
 
 
 }
