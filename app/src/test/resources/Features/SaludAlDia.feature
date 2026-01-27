@@ -9,12 +9,12 @@ Feature: Pruebas de funcionalidad del portal privado paciente de Salud Al Día
     And valido que la toma de datos se haya registrado correctamente
     Then valido descarga de archivo PDF con mi historial
 
-    @Registro @RegresionSaludAlDia
-    Scenario: Validar registro de nuevo usuario paciente y completado de ficha médica
-      Given que el usuario navega a "https://front-salud-al-dia-production.up.railway.app/"
-      When completo registro nuevo usuario
-      And completo ficha medica de usuario paciente
-      Then deberia ver el panel de control del paciente
+  @Registro @RegresionSaludAlDia
+  Scenario: Validar registro de nuevo usuario paciente y completado de ficha médica
+    Given que el usuario navega a "https://front-salud-al-dia-production.up.railway.app/"
+    When completo registro nuevo usuario
+    And completo ficha medica de usuario paciente
+    Then deberia ver el panel de control del paciente
 
   @Admin @RegresionSaludAlDia
   Scenario: Valdiar acceso a panel de administrador y listado de pacientes

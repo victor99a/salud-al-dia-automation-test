@@ -61,10 +61,10 @@ public class SaludAlDiaSteps {
         @And("completo registro nuevo usuario")
         public void completarRegistroNuevoUsuario() {
             saludAlDiaPage.clickBtnRegistrarse();
-            saludAlDiaPage.sendKeysToRutRegistro("92016982-9");
+            saludAlDiaPage.sendKeysToRutRegistro("82016989-9");
             saludAlDiaPage.sendKeysToNombreRegistro("Juan");
             saludAlDiaPage.sendKeysToApellidoRegistro("Pérez");
-            saludAlDiaPage.sendKeysToEmailRegistro("testiiii1ng@gmail.com");
+            saludAlDiaPage.sendKeysToEmailRegistro("holaprofe1ng@gmail.com");
             saludAlDiaPage.sendKeysToPasswordRegistro("123456");
             saludAlDiaPage.clickBtnContinuarRegistro();
             saludAlDiaPage.clickAlertRegistro();
