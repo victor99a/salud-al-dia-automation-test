@@ -12,9 +12,14 @@ import java.io.File;
 import java.time.Duration;
 import java.util.List;
 
+
+// Esta clase representa la interfaz de usuario de la aplicación (UI)
 public class SaludAlDiaPage {
+    // Atributos de la clase
     private final WebDriver driver;
     private final WebDriverWait wait;
+
+    // Elementos de la página mapeados con @FindBy
     @FindBy(xpath = "//a[@class='btn-login']")
     private WebElement btnLogin;
 
@@ -126,12 +131,15 @@ public class SaludAlDiaPage {
     @FindBy(xpath = "//h1[normalize-space()='Ficha Clínica Digital']")
     private WebElement labelFichaMedicaPaciente;
 
+    // Constructor de la clase
     public SaludAlDiaPage(WebDriver driver) {
         this.driver = driver;
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         PageFactory.initElements(driver, this);
     }
 
+
+    // Métodos para interactuar con los elementos de la página
     public void clickBtnLogin() {
         wait.until(ExpectedConditions.elementToBeClickable(btnLogin));
         btnLogin.click();

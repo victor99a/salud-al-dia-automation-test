@@ -9,13 +9,16 @@ import io.cucumber.java.en.Then;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 
+
+// Clase que mapea los pasos de Gherkin (.feature) a código Java ejecutable
 public class SaludAlDiaSteps {
+        // Obtener la instancia del WebDriver desde Hooks
         WebDriver driver = Hooks.getDriver();
         SaludAlDiaPage saludAlDiaPage = new SaludAlDiaPage(driver);
-        // Definimos una espera explícita
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
-        @Given("que el usuario navega a {string}")
+        // Definición de los pasos utilizando anotaciones de Cucumber
+        @Given("navego hasta la siguiente url {string}")
         public void navegarA(String url) {
             driver.get(url);
         }
